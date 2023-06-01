@@ -31,10 +31,22 @@ filter-based approaches in general.
 
 ## Steps To Run
 
-1. Install the requirements:
+1. Install PyTorch and PyTorch Geometric:
+
 
 ```bash
-pip install requirements.txt
+pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 
+--extra-index-url https://download.pytorch.org/whl/cu116
+
+pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv 
+-f https://data.pyg.org/whl/torch-1.13.0+cu116.html
+```
+
+
+2. Install the other requirements:
+
+```bash
+pip install -r requirements.txt
 ```
 
 2. Download the public datasets present in an drive link:
