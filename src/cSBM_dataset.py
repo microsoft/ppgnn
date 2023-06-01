@@ -23,7 +23,6 @@ from datetime import datetime
 from utils import random_planetoid_splits
 import os.path as osp
 import os
-import ipdb
 import argparse
 
 import torch
