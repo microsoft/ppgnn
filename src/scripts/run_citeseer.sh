@@ -1,0 +1,2 @@
+#!/bin/bash
+python train_model.py --dataset citeseer --net PPGNN --split 4 --hidden 16 --Init PPR --alpha 0.9 --lr 0.005 --weight_decay 0.001 --dropout 0.5 --total_buckets 4 --alphas "0.324909645, 0.100214462, 0.544763371, 0.347025153, 0.391095806" --evd_dims 1024 --beta 0.55052969 --K 3

@@ -1,0 +1,2 @@
+#!/bin/bash
+python train_model.py --dataset cora --net PPGNN --split 1 --hidden 16 --Init PPR --alpha 0.9 --lr 0.01 --weight_decay 0.005 --dropout 0.4 --total_buckets 5 --alphas "0.09210494, 0.433701173, 0.430862763, 0.493685098, 0.42583029, 0.312261223" --evd_dims 128 --beta 0.317285482 --K 8

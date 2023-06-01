@@ -1,0 +1,2 @@
+#!/bin/bash
+python train_model.py --dataset wisconsin --net PPGNN --split 9 --hidden 64 --Init PPR --alpha 0.1 --lr 0.005 --weight_decay 0.001 --dropout 0.3 --total_buckets 2 --alphas "0.72921459, 0.606584562, 0.901986606" --evd_dims 256 --beta 0.476700417 --K 2
