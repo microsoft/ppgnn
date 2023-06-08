@@ -4,20 +4,20 @@
 # Distributed under terms of the MIT license.
 # An adaption of GPR-GNN source code
 
-import re
-import os
 import argparse
-from dataset_utils import DataLoaderNew
-
-# from utils import random_planetoid_splits
-from GNN_models import *
-import numpy as np
+import os
 import pickle as pkl
+import random
+import re
 
+import numpy as np
 import torch
 import torch.nn.functional as F
 from tqdm import tqdm
-import random
+
+from dataset_utils import DataLoaderNew
+# from utils import random_planetoid_splits
+from GNN_models import *
 
 np.random.seed(123)
 torch.manual_seed(123)
@@ -172,13 +172,19 @@ def RunExp(args, dataset, data, Net, percls_trn, val_lb):
                 if val_loss > tmp.mean().item():
                     break
 
-    return test_acc, best_val_acc, Gamma_0, predictions[2].detach().cpu().numpy()
+    print(test_acc)
+    return (
+        test_acc,
+        best_val_acc,
+        Gamma_0,
+        predictions[2].detach().cpu().numpy(),
+    )
 
 
 if __name__ == "__main__":
     adjType = "sym_adj"
     parser = argparse.ArgumentParser()
-    parser.add_argument("--epochs", type=int, default=1000)
+    parser.add_argument("--epochs", type=int, default=10)
     parser.add_argument("--lr", type=float, default=0.002)
     parser.add_argument("--weight_decay", type=float, default=0.0005)
     parser.add_argument("--early_stopping", type=int, default=200)
@@ -213,7 +219,7 @@ if __name__ == "__main__":
     parser.add_argument("--split", type=int, default=0, required=True)
     parser.add_argument("--norm", type=str, default="no")
 
-    # additional hyper-params
+    # PPGNN Specific Hyperparameters
     parser.add_argument("--total_buckets", type=int, default=5)
     parser.add_argument("--alphas", type=str)
     parser.add_argument("--evd_dims", type=int, default=64)

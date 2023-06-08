@@ -15,18 +15,17 @@ contains functions:
         dataset_ContextualSBM
 
 """
-import numpy as np
-import torch
-from torch_geometric.data import Data
+import argparse
+import os
+import os.path as osp
 import pickle
 from datetime import datetime
-from utils import random_planetoid_splits
-import os.path as osp
-import os
-import argparse
 
+import numpy as np
 import torch
-from torch_geometric.data import InMemoryDataset
+from torch_geometric.data import Data, InMemoryDataset
+
+from utils import random_planetoid_splits
 
 
 def ContextualSBM(n, d, Lambda, p, mu, train_percent=0.01):

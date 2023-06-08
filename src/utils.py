@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 # vim:fenc=utf-8
 
+import math
 from collections import Counter
 
-import torch
-import math
 import numpy as np
+import torch
 
 
 def index_to_mask(index, size):
