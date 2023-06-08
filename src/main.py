@@ -3,15 +3,8 @@ import argparse
 import numpy as np
 import torch
 
+from baselines import GPRGNN, APPNP_Net, ChebNet, GAT_Net, GCN_JKNet, GCN_Net
 from dataset_utils import Dataset
-from baselines import (
-    GPRGNN,
-    APPNP_Net,
-    ChebNet,
-    GAT_Net,
-    GCN_JKNet,
-    GCN_Net,
-)
 from ppgnn import PPGNN
 from train import train_model
 
@@ -164,4 +157,6 @@ if __name__ == "__main__":
     )
 
     best_test_acc, best_val_acc = train_model(args, dataset, model, device)
-    print(f"\nModel: {args.net} | Dataset: {args.dataset}, Split: {args.split} | Test Accuracy: {best_test_acc * 100:.2f} | Validation Accuracy: {best_val_acc * 100:.2f}")
+    print(
+        f"\nModel: {args.net} | Dataset: {args.dataset}, Split: {args.split} | Test Accuracy: {best_test_acc * 100:.2f} | Validation Accuracy: {best_val_acc * 100:.2f}"
+    )

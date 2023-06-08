@@ -9,14 +9,8 @@ import torch.nn.functional as F
 import torch_geometric.transforms as T
 from numpy.core.numeric import True_
 from torch.nn import Linear, Parameter
-from torch_geometric.nn import (
-    APPNP,
-    ChebConv,
-    GATConv,
-    GCNConv,
-    JumpingKnowledge,
-    MessagePassing,
-)
+from torch_geometric.nn import (APPNP, ChebConv, GATConv, GCNConv,
+                                JumpingKnowledge, MessagePassing)
 from torch_geometric.nn.conv import MessagePassing
 from torch_geometric.utils import add_remaining_self_loops
 from torch_geometric.utils.num_nodes import maybe_num_nodes
@@ -169,9 +163,9 @@ class GPR_prop(MessagePassing):
 
 class GPRGNN(torch.nn.Module):
     """Note that this implementation does not contain the log_softmax in the end.
-        This is because it is being used in PPGNN. If you want to use it as 
-        a standalone model, please add log_softmax in the end."""
-        
+    This is because it is being used in PPGNN. If you want to use it as
+    a standalone model, please add log_softmax in the end."""
+
     def __init__(self, dataset, args):
         super(GPRGNN, self).__init__()
         self.lin1 = Linear(dataset.num_features, args.hidden)

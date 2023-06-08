@@ -1,7 +1,9 @@
-import torch
 import argparse
+
+import torch
 import torch.nn.functional as F
 from torch.nn.parameter import Parameter
+
 from baselines import GPRGNN, get_init
 from dataset_utils import Dataset
 
