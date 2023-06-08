@@ -8,7 +8,7 @@ and the link to the paper on arXiv can be found
 
 ## Citation
 
-If you find this work useful, please cite our paper. Note that the first three authors contributed equally to this work. 
+If you find this work useful, please cite our paper. Note that the first three authors contributed equally to this work.
 
 ```bibtex
 @InProceedings{10.1007/978-3-031-26390-3_25,
@@ -77,13 +77,25 @@ bash scripts/download_data.sh
 
 ```bash
 cd ppgnn/src
-bash scripts/run_<dataset>.sh
+bash ../scripts/run_<dataset>.sh
 
 #For example:
 
 cd ppgnn/src
-bash scripts/run_cora.sh
+bash ../scripts/run_cora.sh
 ```
+
+## People Involved
+
+This project would not have been possible without the involvement of the following people:
+
+- Vijay Lingam [📧](mailto:vijaylingam0810@gmail.com)
+- Manan Sharma [📧](mailto:manan2908@gmail.com)
+- Chanakya Ekbote [📧](mailto:chanakyekbote@gmail.com)
+- Rahul Ragesh [📧](mailto:rahulragesh@microsoft.com)
+- Arun Iyer [📧](mailto:ariy@microsoft.com)
+- Sundararajan Sellamanickam [📧](mailto:ssrajan@microsoft.com)
+- B. Ashok (BASH) [📧](mailto:bash@microsoft.com)
 
 ## Contributing
 
