@@ -4,8 +4,15 @@ import numpy as np
 import torch
 
 from dataset_utils import Dataset
-from GNN_models import (GPRGNN, PPGNN, APPNP_Net, ChebNet, GAT_Net, GCN_JKNet,
-                        GCN_Net)
+from baselines import (
+    GPRGNN,
+    APPNP_Net,
+    ChebNet,
+    GAT_Net,
+    GCN_JKNet,
+    GCN_Net,
+)
+from ppgnn import PPGNN
 from train import train_model
 
 
@@ -66,13 +73,12 @@ if __name__ == "__main__":
         "--net",
         type=str,
         choices=["GCN", "GAT", "APPNP", "ChebNet", "JKNet", "GPRGNN", "PPGNN"],
-        default="GPRGNN",
+        default="PPGNN",
     )
     parser.add_argument(
         "--split",
         type=int,
         default=0,
-        required=True,
         help="Split number for the dataset",
     )
     parser.add_argument(
@@ -106,7 +112,7 @@ if __name__ == "__main__":
         "--Init",
         type=str,
         choices=["SGC", "PPR", "NPPR", "Random", "WS", "Null"],
-        default="PPR",
+        default="Random",
         help="Initialization method",
     )
     parser.add_argument("--ppnp", default="GPR_prop", choices=["PPNP", "GPR_prop"])
@@ -144,16 +150,18 @@ if __name__ == "__main__":
 
     args.feat_dims = 2048  # Where is this used?
     args.beta = float(args.beta)
-    args.alphas = list(map(float, args.alphas.split(",")))
+    args.alphas = list(map(float, args.alphas.split(","))) if args.alphas else None
     device = torch.device(f"cuda:{args.cuda}" if torch.cuda.is_available() else "cpu")
 
     model = get_model(args.net)
-    dataset = Dataset(dataset_name=args.dataset, split=args.split,
-                      adj_type=args.norm + "_adj", evd_dims=args.evd_dims,
-                      total_buckets=args.total_buckets, data_dir=args.data_dir)
+    dataset = Dataset(
+        dataset_name=args.dataset,
+        split=args.split,
+        adj_type=args.norm + "_adj",
+        evd_dims=args.evd_dims,
+        total_buckets=args.total_buckets,
+        data_dir=args.data_dir,
+    )
 
     best_test_acc, best_val_acc = train_model(args, dataset, model, device)
-    print(f"For model {args.net} on dataset {args.dataset}:")
-    print(
-        f"Test Accuracy: {best_test_acc:.4f} | Validation Accuracy: {best_val_acc:.4f}"
-    )
+    print(f"\nModel: {args.net} | Dataset: {args.dataset}, Split: {args.split} | Test Accuracy: {best_test_acc * 100:.2f} | Validation Accuracy: {best_val_acc * 100:.2f}")

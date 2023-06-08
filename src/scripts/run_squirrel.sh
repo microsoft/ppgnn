@@ -1,2 +1,0 @@
-#!/bin/bash
-python train_model.py --dataset squirrel --net PPGNN --split 3 --hidden 16 --Init PPR --alpha 0.9 --lr 0.008 --weight_decay 0.0005 --dropout 0.7 --total_buckets 5 --alphas "0.338293829, 0.074655716, 0.782878507,	0.190958859, 0.644300965, 0.269786285" --evd_dims 1024 --beta 0.475421622 --K 2

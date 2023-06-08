@@ -13,17 +13,8 @@ import numpy as np
 import pandas as pd
 import scipy
 import torch
-import torch.nn.functional as F
-import torch_geometric.transforms as T
 from numpy import linalg as LA
-from sklearn.decomposition import PCA
-from sklearn.utils.extmath import randomized_svd
-from torch_geometric.data import Data, InMemoryDataset, download_url
-from torch_geometric.datasets import Amazon, Coauthor, Planetoid
-from torch_geometric.io import read_npz
-from torch_geometric.nn import APPNP
-from torch_geometric.utils.undirected import is_undirected, to_undirected
-from torch_sparse import coalesce
+from torch_geometric.data import Data
 
 
 def index_to_mask(index, size):

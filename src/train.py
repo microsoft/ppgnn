@@ -89,17 +89,7 @@ def get_optimizer(args: argparse, model: torch.nn.Module) -> torch.optim.Optimiz
 
         if args.beta > 0 and args.beta <= 1:
             GPRGNN_pro_vars = [
-                {
-                    "params": model.en_model.lin1.parameters(),
-                    "weight_decay": args.weight_decay,
-                    "lr": args.lr,
-                },
-                {
-                    "params": model.en_model.lin2.parameters(),
-                    "weight_decay": args.weight_decay,
-                    "lr": args.lr,
-                },
-                {"params": model.en_model.polynomials.parameters()},
+                {"params": model.piecewise_model.polynomials.parameters()},
             ]
 
             trainable_vars += GPRGNN_pro_vars

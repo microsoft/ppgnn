@@ -1,2 +1,0 @@
-#!/bin/bash
-python train_model.py --dataset amazon_electronics_photo --net PPGNN --split 5 --hidden 32 --Init PPR --alpha 0.5 --lr 0.005 --weight_decay 0.005 --dropout 0.2 --total_buckets 4 --alphas "0.560634143, 0.794203471, 0.748465746, 0.59065997, 0.197023017" --evd_dims 512 --beta 0.504055858 --K 4

@@ -1,33 +1,41 @@
+"""Code borrowed from the GPRGNN repository: 
+    https://github.com/jianhao2016/GPRGNN.git. All credits go to the original 
+    authors."""
+
+
 import numpy as np
 import torch
 import torch.nn.functional as F
 import torch_geometric.transforms as T
 from numpy.core.numeric import True_
 from torch.nn import Linear, Parameter
-from torch_geometric.nn import (APPNP, ChebConv, GATConv, GCNConv,
-                                JumpingKnowledge, MessagePassing)
+from torch_geometric.nn import (
+    APPNP,
+    ChebConv,
+    GATConv,
+    GCNConv,
+    JumpingKnowledge,
+    MessagePassing,
+)
 from torch_geometric.nn.conv import MessagePassing
 from torch_geometric.utils import add_remaining_self_loops
 from torch_geometric.utils.num_nodes import maybe_num_nodes
 from torch_scatter import scatter_add
 from torch_sparse import SparseTensor, fill_diag, mul, sum
 
-np.random.seed(123)
-torch.manual_seed(123)
-torch.cuda.manual_seed(123)
-
 
 def gcn_norm(
-    edge_index,
-    norm,
-    edge_weight=None,
-    num_nodes=None,
-    improved=False,
-    add_self_loops=True,
-    dtype=None,
-):
-    fill_value = 2.0 if improved else 1.0
+    edge_index: torch.Tensor,
+    norm: str = "sym",
+    edge_weight: torch.Tensor = None,
+    num_nodes: int = None,
+    improved: bool = False,
+    add_self_loops: bool = True,
+    dtype: str = None,
+) -> tuple([torch.Tensor, torch.Tensor]):
+    """GCN normalization"""
 
+    fill_value = 2.0 if improved else 1.0
     if isinstance(edge_index, SparseTensor):
         adj_t = edge_index
         if not adj_t.has_value():
@@ -96,9 +104,7 @@ def get_init(Init, alpha, K):
 
 
 class GPR_prop(MessagePassing):
-    """
-    propagation class for GPR_GNN
-    """
+    """Propagation class for GPR_GNN"""
 
     def __init__(self, K, alpha, Init, norm, Gamma=None, bias=True, **kwargs):
         super(GPR_prop, self).__init__(aggr="add", **kwargs)
@@ -161,79 +167,11 @@ class GPR_prop(MessagePassing):
         return "{}(K={}, temp={})".format(self.__class__.__name__, self.K, self.temp)
 
 
-class EN(torch.nn.Module):
-    def __init__(self, K, alphas, Init, dataset, args, gpr):
-        super(EN, self).__init__()
-        self.K = K
-        self.Init = Init
-        self.dataset = dataset
-        self.dropout = args.dropout
-        self.gpr = gpr
-
-        self.polynomials = torch.nn.ParameterList()
-
-        for i in range(len(dataset.data.bucketed_Sa_vals)):
-            self.polynomials.append(Parameter(torch.tensor(get_init(Init, None, K))))
-
-    def forward(self, data):
-
-        wa1 = self.polynomials[0][1] * data.bucketed_Sa_vals[0]
-        for k in range(1, self.K):
-            wa1 += self.polynomials[0][k + 1] * torch.pow(
-                data.bucketed_Sa_vals[0], k + 1
-            )
-        wa1 += self.polynomials[0][0]
-        adapted_eigs = wa1
-
-        for poly in range(1, len(self.polynomials)):
-            wa = self.polynomials[poly][1] * data.bucketed_Sa_vals[poly]
-            for k in range(1, self.K):
-                wa += self.polynomials[poly][k + 1] * torch.pow(
-                    data.bucketed_Sa_vals[poly], k + 1
-                )
-            wa += self.polynomials[poly][0]
-
-            adapted_eigs = torch.cat((adapted_eigs, wa), 0)
-
-        diag_eigs = torch.diag(torch.squeeze(adapted_eigs))
-        A = torch.mm(torch.mm(data.Ua, diag_eigs), data.Ua.T)
-
-        # corrected version
-        x = F.dropout(data.x, p=self.dropout, training=self.training)
-        x = F.relu(self.gpr.lin1(x))
-        x = F.dropout(x, p=self.dropout, training=self.training)
-        x = self.gpr.lin2(x)
-
-        x = torch.mm(A, x)
-
-        return x
-
-
-class PPGNN(torch.nn.Module):
-    def __init__(self, dataset, args):
-        super(PPGNN, self).__init__()
-        self.args = args
-        self.gprnn_model = GPRGNN(dataset, args)
-        self.en_model = EN(
-            args.K, None, args.Init, dataset, args, self.gprnn_model
-        )  # args.alphas
-
-    def forward(self, data):
-        if self.args.beta == 0:
-            gpr_out = self.gprnn_model(data)
-            return F.log_softmax(gpr_out, dim=1)
-        elif self.args.beta == 1:
-            en_out = self.en_model(data)
-            return F.log_softmax(en_out, dim=1)
-        else:
-            gpr_out = self.gprnn_model(data)
-            en_out = self.en_model(data)
-            return F.log_softmax(
-                self.args.beta * en_out + (1 - self.args.beta) * gpr_out, dim=1
-            )
-
-
 class GPRGNN(torch.nn.Module):
+    """Note that this implementation does not contain the log_softmax in the end.
+        This is because it is being used in PPGNN. If you want to use it as 
+        a standalone model, please add log_softmax in the end."""
+        
     def __init__(self, dataset, args):
         super(GPRGNN, self).__init__()
         self.lin1 = Linear(dataset.num_features, args.hidden)
