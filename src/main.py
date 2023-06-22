@@ -141,11 +141,12 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    args.feat_dims = 2048  # Where is this used?
+    args.feat_dims = 2048
     args.beta = float(args.beta)
     args.alphas = list(map(float, args.alphas.split(","))) if args.alphas else None
     device = torch.device(f"cuda:{args.cuda}" if torch.cuda.is_available() else "cpu")
 
+    set_seed(args.seed)
     model = get_model(args.net)
     dataset = Dataset(
         dataset_name=args.dataset,
