@@ -6,6 +6,35 @@ can be found [here](https://link.springer.com/chapter/10.1007/978-3-031-26390-3_
 and the link to the paper on arXiv can be found
 [here](https://arxiv.org/abs/2112.03499).
 
+## Citation
+
+If you find this work useful, please cite our paper. Note that the first three authors contributed equally to this work.
+
+```bibtex
+@InProceedings{10.1007/978-3-031-26390-3_25,
+author="Lingam, Vijay
+and Sharma, Manan
+and Ekbote, Chanakya
+and Ragesh, Rahul
+and Iyer, Arun
+and Sellamanickam, Sundararajan",
+editor="Amini, Massih-Reza
+and Canu, St{\'e}phane
+and Fischer, Asja
+and Guns, Tias
+and Kralj Novak, Petra
+and Tsoumakas, Grigorios",
+title="A Piece-Wise Polynomial Filtering Approach for Graph Neural Networks",
+booktitle="Machine Learning and Knowledge Discovery in Databases",
+year="2023",
+publisher="Springer International Publishing",
+address="Cham",
+pages="412--452",
+abstract="Graph Neural Networks (GNNs) exploit signals from node features and the input graph topology to improve node classification task performance. Recently proposed GNNs work across a variety of homophilic and heterophilic graphs. Among these, models relying on polynomial graph filters have shown promise. We observe that polynomial filter models need to learn a reasonably high degree polynomials without facing any over-smoothing effects. We find that existing methods, due to their designs, either have limited efficacy or can be enhanced further. We present a spectral method to learn a bank of filters using a piece-wise polynomial approach, where each filter acts on a different subsets of the eigen spectrum. The approach requires eigendecomposition only for a few eigenvalues at extremes (i.e., low and high ends of the spectrum) and offers flexibility to learn sharper and complex shaped frequency responses with low-degree polynomials. We theoretically and empirically show that our proposed model learns a better filter, thereby improving classification accuracy. Our model achieves performance gains of up to {\$}{\$}{\backslash}sim {\$}{\$}∼6{\%} over the state-of-the-art (SOTA) models while being only {\$}{\$}{\backslash}sim {\$}{\$}∼2x slower than the recent spectral approaches on graphs of sizes up to {\$}{\$}{\backslash}sim {\$}{\$}∼169K nodes.",
+isbn="978-3-031-26390-3"
+}
+```
+
 ## Abstract
 
 Graph Neural Networks (GNNs) exploit signals from node features and the input
@@ -40,7 +69,7 @@ pip install -r requirements.txt
 2. Download the public datasets present in an drive link:
 
 ```bash
-cd ppgnn/src
+cd ppgnn
 bash scripts/download_data.sh
 ```
 
@@ -48,13 +77,23 @@ bash scripts/download_data.sh
 
 ```bash
 cd ppgnn/src
-bash scripts/run_<dataset>.sh
+bash ../scripts/run_<dataset>.sh
 
 #For example:
 
 cd ppgnn/src
-bash scripts/run_cora.sh
+bash ../scripts/run_cora.sh
 ```
+
+## People Involved
+
+- Chanakya Ekbote [📧](mailto:chanakyekbote@gmail.com)
+- Vijay Lingam [📧](mailto:vijaylingam0810@gmail.com)
+- Manan Sharma [📧](mailto:manan2908@gmail.com)
+- Rahul Ragesh [📧](mailto:rahulragesh@microsoft.com)
+- Arun Iyer [📧](mailto:ariy@microsoft.com)
+- Sundararajan Sellamanickam [📧](mailto:ssrajan@microsoft.com)
+- B. Ashok (BASH) [📧](mailto:bash@microsoft.com)
 
 ## Contributing
 

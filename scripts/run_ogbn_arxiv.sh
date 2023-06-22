@@ -1,2 +1,0 @@
-#!/bin/bash
-python train_model.py --dataset texas --net PPGNN --split 5 --hidden 64 --Init PPR --alpha 0.1 --lr 0.005 --weight_decay 0.0001 --dropout 0.2 --total_buckets 2 --alphas "0.23329356988780536, 0.01975609057967087, 0.36556728118576176" --evd_dims 1024 --beta 0.6198510774700762 --K 6

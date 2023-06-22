@@ -1,2 +1,0 @@
-#!/bin/bash
-python train_model.py --dataset chameleon_pca --net PPGNN --split 4 --hidden 32 --Init PPR --alpha 0.1 --lr 0.003 --weight_decay 0.001 --dropout 0.5 --total_buckets 4 --alphas "0.703984988, 0.882227218,	0.896620177, 0.368717563, 0.584842505" --evd_dims 256 --beta 0.959941144 --K 6
