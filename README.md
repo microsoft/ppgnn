@@ -87,11 +87,9 @@ bash ../scripts/run_cora.sh
 
 ## People Involved
 
-This project would not have been possible without the involvement of the following people:
-
+- Chanakya Ekbote [📧](mailto:chanakyekbote@gmail.com)
 - Vijay Lingam [📧](mailto:vijaylingam0810@gmail.com)
 - Manan Sharma [📧](mailto:manan2908@gmail.com)
-- Chanakya Ekbote [📧](mailto:chanakyekbote@gmail.com)
 - Rahul Ragesh [📧](mailto:rahulragesh@microsoft.com)
 - Arun Iyer [📧](mailto:ariy@microsoft.com)
 - Sundararajan Sellamanickam [📧](mailto:ssrajan@microsoft.com)
