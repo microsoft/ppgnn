@@ -83,9 +83,8 @@ pip install -r linux_requirements.txt
 
 4. Download the public datasets present in an drive link:
 
-```bash
-cd ppgnn
-bash scripts/download_data.sh
+```python
+python src/download_datasets.py
 ```
 
 5. Run the bash scripts for a particular dataset:
