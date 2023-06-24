@@ -1,79 +1,42 @@
-# PPGNN: A Piece-Wise Polynomial Filtering Approach for Graph Neural Networks
+# FiGURe: Simple and Efficient Unsupervised Node Representations with Filter Augmentations
 
-This repo contains the code for the paper published at `ECML PKDD 2022: Machine
-Learning and Knowledge Discovery in Databases`. The link to our ECML publication
-can be found [here](https://link.springer.com/chapter/10.1007/978-3-031-26390-3_25)
-and the link to the paper on arXiv can be found
-[here](https://arxiv.org/abs/2112.03499).
-
-## Citation
-
-If you find this work useful, please cite our paper. Note that the first three authors contributed equally to this work.
-
-```bibtex
-@InProceedings{10.1007/978-3-031-26390-3_25,
-author="Lingam, Vijay
-and Sharma, Manan
-and Ekbote, Chanakya
-and Ragesh, Rahul
-and Iyer, Arun
-and Sellamanickam, Sundararajan",
-editor="Amini, Massih-Reza
-and Canu, St{\'e}phane
-and Fischer, Asja
-and Guns, Tias
-and Kralj Novak, Petra
-and Tsoumakas, Grigorios",
-title="A Piece-Wise Polynomial Filtering Approach for Graph Neural Networks",
-booktitle="Machine Learning and Knowledge Discovery in Databases",
-year="2023",
-publisher="Springer International Publishing",
-address="Cham",
-pages="412--452",
-abstract="Graph Neural Networks (GNNs) exploit signals from node features and the input graph topology to improve node classification task performance. Recently proposed GNNs work across a variety of homophilic and heterophilic graphs. Among these, models relying on polynomial graph filters have shown promise. We observe that polynomial filter models need to learn a reasonably high degree polynomials without facing any over-smoothing effects. We find that existing methods, due to their designs, either have limited efficacy or can be enhanced further. We present a spectral method to learn a bank of filters using a piece-wise polynomial approach, where each filter acts on a different subsets of the eigen spectrum. The approach requires eigendecomposition only for a few eigenvalues at extremes (i.e., low and high ends of the spectrum) and offers flexibility to learn sharper and complex shaped frequency responses with low-degree polynomials. We theoretically and empirically show that our proposed model learns a better filter, thereby improving classification accuracy. Our model achieves performance gains of up to {\$}{\$}{\backslash}sim {\$}{\$}∼6{\%} over the state-of-the-art (SOTA) models while being only {\$}{\$}{\backslash}sim {\$}{\$}∼2x slower than the recent spectral approaches on graphs of sizes up to {\$}{\$}{\backslash}sim {\$}{\$}∼169K nodes.",
-isbn="978-3-031-26390-3"
-}
-```
+This repo contains the code for our paper submitted to NeurIPS'23 and MLG, KDD'23.
 
 ## Abstract
 
-Graph Neural Networks (GNNs) exploit signals from node features and the input
-graph topology to improve node classification task performance. However, these
-models tend to perform poorly on heterophilic graphs, where connected nodes have
-different labels. Recently proposed GNNs work across graphs having varying levels
-of homophily. Among these, models relying on polynomial graph filters have shown
-promise. We observe that solutions to these polynomial graph filter models are
-also solutions to an overdetermined system of equations. It suggests that in
-some instances, the model needs to learn a reasonably high order polynomial.
-On investigation, we find the proposed models ineffective at learning such
-polynomials due to their designs. To mitigate this issue, we perform an
-eigendecomposition of the graph and propose to learn multiple adaptive
-polynomial filters acting on different subsets of the spectrum. We theoretically
-and empirically show that our proposed model learns a better filter, thereby
-improving classification accuracy. We study various aspects of our proposed
-model including, dependency on the number of eigencomponents utilized, latent
-polynomial filters learned, and performance of the individual polynomials on
-the node classification task. We further show that our model is scalable by
-evaluating over large graphs. Our model achieves performance gains of up to 5%
-over the state-of-the-art models and outperforms existing polynomial
-filter-based approaches in general.
+ Unsupervised node representations learnt using contrastive learning-based methods have shown good performance on downstream tasks. However, these methods rely on augmentations that mimic low-pass filters, limiting their performance on tasks requiring different eigen-spectrum parts. This paper presents a simple filter-based augmentation method to capture different parts of the eigen-spectrum. We show significant improvements using these augmentations. Further, we show that sharing the same weights across these different filter augmentations is possible, reducing the computational load. In addition, previous works have shown that good performance on downstream tasks requires high dimensional representations. Working with high dimensions increases the computations, especially when multiple augmentations are involved. We mitigate this problem and recover good performance through lower dimensional embeddings using simple random Fourier feature projections. Our method, \ourmethod, achieves an average gain of up to 4.4\%, compared to the state-of-the-art unsupervised models, across all datasets in consideration, both homophilic and heterophilic.
+
 
 ## Steps To Run
 
-1. Install the requirements:
+1. Install Anaconda basis this [link](https://www.anaconda.com).
+
+2. Create and activate a conda environment (Note that we use Python 3.10.11):
 
 ```bash
-pip install -r requirements.txt
+conda create -n ppgnn python=3.10.11
+
+conda activate ppgnn
 ```
 
-2. Download the public datasets present in an drive link:
+3. Install the requirements basis the OS you are using:
+
+```bash
+pip install -r <os>_requirements.txt
+
+#For example:
+
+pip install -r linux_requirements.txt
+```
+
+4. Download the public datasets present in an drive link:
 
 ```bash
 cd ppgnn
 bash scripts/download_data.sh
 ```
 
-3. Run the bash scripts for a particular dataset:
+5. Run the bash scripts for a particular dataset:
 
 ```bash
 cd ppgnn/src
