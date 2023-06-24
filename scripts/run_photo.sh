@@ -1,1 +1,0 @@
-python main.py --lr 0.005 --weight_decay 0.001 --hidden 64 --dropout 0.3 --K 2 --dprate 0.5 --Init Random --dataset amazon_electronics_photo --split 2 --beta 0.293714046388829 --total_buckets 4 --evd_dims 256 --net PPGNN

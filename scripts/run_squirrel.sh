@@ -1,2 +1,0 @@
-#!/bin/bash
-python main.py --lr 0.005 --weight_decay 0.001 --hidden 64 --dropout 0.5 --K 4 --dprate 0.5 --Init Random --dataset squirrel --split 0 --beta 0.792651360726474 --total_buckets 4 --evd_dims 1024 --net PPGNN

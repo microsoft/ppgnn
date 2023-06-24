@@ -1,2 +1,0 @@
-#!/bin/bash
-python main.py --lr 0.005 --weight_decay 0.001 --hidden 64 --dropout 0.5 --K 2 --dprate 0.5 --Init Random --dataset chameleon_pca --split 4 --beta 0.854452487524504 --total_buckets 4 --evd_dims 256 --net PPGNN

@@ -1,2 +1,0 @@
-#!/bin/bash
-python main.py --lr 0.005 --weight_decay 0.001 --hidden 64 --dropout 0.3 --K 6 --dprate 0.5 --Init Random --dataset cora_full_pca --split 0 --beta 0.669313782962272 --total_buckets 4 --evd_dims 256 --net PPGNN

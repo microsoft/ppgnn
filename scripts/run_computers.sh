@@ -1,2 +1,0 @@
-#!/bin/bash
-python main.py --dataset amazon_electronics_computers --net PPGNN --split 2 --hidden 64 --Init Random --lr 0.005 --weight_decay 0.0001 --dropout 0.5 --total_buckets 4 --evd_dims 256 --beta 0.544763370991629 --K 4 --dprate 0.5
