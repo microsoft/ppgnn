@@ -83,7 +83,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data_dir",
         type=str,
-        default="../datasets",
+        default="../graph_datasets",
         help="Path to the dataset directory",
     )
 
