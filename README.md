@@ -87,16 +87,13 @@ pip install -r linux_requirements.txt
 python src/download_datasets.py
 ```
 
-5. Run the bash scripts for a particular dataset:
+5. Run the commands for a particular dataset given in scripts/all_commands.txt:
 
 ```bash
-cd ppgnn/src
-bash ../scripts/run_<dataset>.sh
-
 #For example:
 
-cd ppgnn/src
-bash ../scripts/run_cora.sh
+$ cd ppgnn/src
+$ python main.py --lr 0.005 --weight_decay 0.001 --hidden 64 --dropout 0.5 --K 2 --dprate 0.5 --Init Random --dataset Cora --split 2 --beta 0.293714046388829 --total_buckets 4 --evd_dims 256 --net PPGNN
 ```
 
 ## People Involved
