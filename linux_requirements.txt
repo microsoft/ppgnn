@@ -5,7 +5,7 @@ h5py==3.8.0
 gdown==4.7.1
 pandas==2.0.2
 --extra-index-url https://download.pytorch.org/whl/cu116
-torch==1.13.1+cu116
+torch==2.2.0
 torchvision==0.14.1+cu116
 torchaudio==0.13.1
 -f https://data.pyg.org/whl/torch-1.13.0+cu116.html
