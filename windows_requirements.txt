@@ -1,14 +1,14 @@
 numpy==1.24.3
-tqdm==4.66.3
-scikit-learn==1.2.2
+tqdm==4.65.0
+scikit-learn==1.5.0
 h5py==3.8.0
 gdown==4.7.1
 pandas==2.0.2
---extra-index-url https://download.pytorch.org/whl/cu116
-torch==1.13.1+cu116
-torchvision==0.14.1+cu116
-torchaudio==0.13.1
--f https://data.pyg.org/whl/torch-1.13.0+cu116.html
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch==2.8.0
+torchvision==0.23.0
+torchaudio==2.8.0
+-f https://data.pyg.org/whl/torch-2.8.0+cu126.html
 torch_geometric
 torch_scatter 
 torch_sparse 
