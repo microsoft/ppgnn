@@ -7,7 +7,6 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 import torch_geometric.transforms as T
-from numpy.core.numeric import True_
 from torch.nn import Linear, Parameter
 from torch_geometric.nn import (APPNP, ChebConv, GATConv, GCNConv,
                                 JumpingKnowledge, MessagePassing)
